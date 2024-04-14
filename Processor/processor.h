@@ -5,15 +5,23 @@
 #include <QString>
 
 const short cache_lines_num = 4;
+const short memory_cells_num = 16;
+const short processors_num = 4;
 
-class Processor {
+class Processor : public QObject {
+    Q_OBJECT
 public:
     Processor(int id);
 
     void readLine(short read_address); // запись строки
     void writeLine(short write_address); // чтение строки
 
-    std::vector<CacheLine> getCache() { return Cache; };
+    std::vector<CacheLine>& getCache() { return Cache; };
+    short getId() { return id; }
+
+signals:
+    void BusInvalidate(short lineAddress, int id); // сигнал на шину об инвалидации всех ячеек в кэшах с данным адресом
+    void BusShared(short lineAddress); // сигнал на шину о переходе всех ячеек в кэшах с данным адресом в состояние Shared
 
 private:
     // первая половина ячеек кэша под четные адреса памяти, вторая - нечетные

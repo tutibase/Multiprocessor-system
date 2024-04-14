@@ -3,7 +3,6 @@
 #include <QString>
 #include <QDebug>
 
-const short memory_cells_num = 16;
 class MemoryLine {
 public:
     MemoryLine(short address);

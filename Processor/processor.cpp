@@ -2,9 +2,9 @@
 
 Processor::Processor(int id) {
     this->id = id;
-    this->Cache = {};
     this->requests_num = std::vector<int>(memory_cells_num, 0);
 
+    this->Cache = {};
     for (int i = 0; i < cache_lines_num; i++) {
         this->Cache.push_back(CacheLine(i, 'I'));
     }
@@ -21,7 +21,6 @@ void Processor::readLine(short read_address) {
             char state = Cache[i].getState();
             if (state == 'M' or state == 'E' or
                 state == 'S' or state == 'F') {
-                // Добавить сообщение в лог: "Данные ячейки read_address переданы в процессор"
                 qDebug() << QString("Read Hit, данные ячейки a%1 переданы в процессор").arg(read_address);
                 read_hit = true; // обозначаем, что у нас Read Hit
             }
@@ -66,10 +65,10 @@ void Processor::writeLine(short write_address) {
                 Cache[i].incrementData();
                 Cache[i].updateState('M');
                 write_hit = 1;
-                // добавить Write Invalidate на шину
                 qDebug() << QString("Данные ячейки a%1 перезаписаны с %2 на %3,"
                                     " на шину отправлен Invalidate").arg(write_address)
                                     .arg(+Cache[i].getData()-1).arg(+Cache[i].getData());
+                emit BusInvalidate(write_address, id);
                 break;
             }
 
