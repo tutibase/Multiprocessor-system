@@ -45,64 +45,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_5">
-            <item>
-             <widget class="QLabel" name="memory_0">
-              <property name="text">
-               <string>address: a0, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_1">
-              <property name="text">
-               <string>address: a1, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_2">
-              <property name="text">
-               <string>address: a2, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_3">
-              <property name="text">
-               <string>address: a3, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_4">
-              <property name="text">
-               <string>address: a4, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_5">
-              <property name="text">
-               <string>address: a5, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_6">
-              <property name="text">
-               <string>address: a6, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_7">
-              <property name="text">
-               <string>address: a7, data: 0</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <layout class="QVBoxLayout" name="verticalLayout_5"/>
           </item>
           <item>
            <spacer name="verticalSpacer">
@@ -118,64 +61,7 @@
            </spacer>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_6">
-            <item>
-             <widget class="QLabel" name="memory_8">
-              <property name="text">
-               <string>address: a8, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_9">
-              <property name="text">
-               <string>address: a9, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_10">
-              <property name="text">
-               <string>address: a10, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_11">
-              <property name="text">
-               <string>address: a11, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_12">
-              <property name="text">
-               <string>address: a12, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_13">
-              <property name="text">
-               <string>address: a13, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_14">
-              <property name="text">
-               <string>address: a14, data: 0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="memory_15">
-              <property name="text">
-               <string>address: a15, data: 0</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <layout class="QVBoxLayout" name="verticalLayout_6"/>
           </item>
          </layout>
         </item>
