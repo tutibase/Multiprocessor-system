@@ -5,10 +5,10 @@ Processor::Processor(int id) {
     this->requests_num = std::vector<int>(memory_cells_num, 0);
 
     this->Cache = {};
-    this->Cache.push_back(CacheLine(0, 'I'));
-    this->Cache.push_back(CacheLine(2, 'I'));
-    this->Cache.push_back(CacheLine(1, 'I'));
-    this->Cache.push_back(CacheLine(3, 'I'));
+    this->Cache.push_back(CacheLine(-1, 'I'));
+    this->Cache.push_back(CacheLine(-1, 'I'));
+    this->Cache.push_back(CacheLine(-1, 'I'));
+    this->Cache.push_back(CacheLine(-1, 'I'));
 }
 
 void Processor::readLine(short read_address) {

@@ -157,8 +157,11 @@ void MainWindow::updateCache() {
     for (int i = 0; i < processors_num; i++) {
         for (int j = 0; j < cache_lines_num; j++) {
             auto cache = bus->processors[i]->getCache()[j];
-            CPULabels[i][j]->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                                         .arg(cache.getAddress()).arg(+cache.getData()));
+            if (cache.getAddress() == -1)
+                CPULabels[i][j]->setText(QString("I"));
+            else
+                CPULabels[i][j]->setText(QString("%1 | a%2 | %3").arg(cache.getState())
+                                             .arg(cache.getAddress()).arg(+cache.getData()));
         }
     }
 
