@@ -10,7 +10,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->log->insertPlainText("MESIF protocol with \"least frequently used\" replacement policy:\n");
 
+    CPULabels = {};
+
     for (int i = 0; i < processors_num; i++) {
+        CacheLabels labels;
+        for (int j = 0; j < cache_lines_num; j++) {
+            labels.push_back(new QLabel("I"));
+        }
+        CPULabels.push_back(labels);
         QObject::connect(bus->processors[i], &Processor::BusInvalidate,
                          bus, &Bus::BusInvalidate);
 
@@ -26,6 +33,14 @@ MainWindow::MainWindow(QWidget *parent)
         QObject::connect(bus->processors[i], &Processor::updateCacheView,
                          this, &MainWindow::updateCache);
     }
+
+    for (int i = 0; i < cache_lines_num; i++) {
+        ui->verticalLayout->addWidget(CPULabels[0][i]);
+        ui->verticalLayout_2->addWidget(CPULabels[1][i]);
+        ui->verticalLayout_3->addWidget(CPULabels[2][i]);
+        ui->verticalLayout_4->addWidget(CPULabels[3][i]);
+    }
+
     QObject::connect(bus, &Bus::updateLog,
                      this, &MainWindow::updateLog);
     QObject::connect(bus, &Bus::updateCacheView, this, &MainWindow::updateCache);
@@ -89,57 +104,14 @@ void MainWindow::on_write_3_clicked() {
 }
 
 void MainWindow::updateCache() {
-    auto cache = bus->processors[0]->getCache()[0];
-    ui->cache_0_0->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[0]->getCache()[1];
-    ui->cache_0_1->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[0]->getCache()[2];
-    ui->cache_0_2->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[0]->getCache()[3];
-    ui->cache_0_3->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
+    for (int i = 0; i < processors_num; i++) {
+        for (int j = 0; j < cache_lines_num; j++) {
+            auto cache = bus->processors[i]->getCache()[j];
+            CPULabels[i][j]->setText(QString("%1 | a%2 | %3").arg(cache.getState())
+                                         .arg(cache.getAddress()).arg(+cache.getData()));
+        }
+    }
 
-    cache = bus->processors[1]->getCache()[0];
-    ui->cache_1_0->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[1]->getCache()[1];
-    ui->cache_1_1->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[1]->getCache()[2];
-    ui->cache_1_2->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[1]->getCache()[3];
-    ui->cache_1_3->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-
-    cache = bus->processors[2]->getCache()[0];
-    ui->cache_2_0->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[2]->getCache()[1];
-    ui->cache_2_1->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[2]->getCache()[2];
-    ui->cache_2_2->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[2]->getCache()[3];
-    ui->cache_2_3->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-
-    cache = bus->processors[3]->getCache()[0];
-    ui->cache_3_0->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[3]->getCache()[1];
-    ui->cache_3_1->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[3]->getCache()[2];
-    ui->cache_3_2->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
-    cache = bus->processors[3]->getCache()[3];
-    ui->cache_3_3->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                               .arg(cache.getAddress()).arg(+cache.getData()));
 }
 
 void MainWindow::updateMemory() {
