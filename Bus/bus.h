@@ -19,8 +19,9 @@ signals:
 public slots:
     // инвалидация всех ячеек в кэшах с данным адресом, кроме отправившего сигнал процессора
     void BusInvalidate(short lineAddress, int id);
-    // переход всех ячеек в кэшах с данным адресом в состояние Shared
-    //void BusShared(short lineAddress);
+    // перезапись строки cache_line_num в кэше процессора id
+    void writeDataToCache(int id, short cache_line_num, short lineAddress, char data, char state);
+    void writeDataToMemory(short lineAddress, char data);
 
     // чтение в кэш процессора ячейки памяти из остальных кэшей / памяти
     void BusRead(short lineAddress, int id);

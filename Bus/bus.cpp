@@ -29,19 +29,6 @@ void Bus::BusInvalidate(short lineAddress, int id) {
     emit updateCacheView();
 }
 
-/*
-void Bus::BusShared(short lineAddress) {
-    // проходим по всем строчкам кэша в системе
-    for (int i = 0; i < processors_num; i++) {
-        for (int j = 0; j < cache_lines_num; j++) {
-            if (processors[i]->getCache()[j].getAddress() == lineAddress) {
-                processors[i]->getCache()[j].updateState('S');
-                break; // больше в этом процессоре таких строк не будет
-            }
-        }
-    }
-    qDebug() << QString("Bus Shared to a%1!").arg(lineAddress);
-}*/
 
 void Bus::BusRead(short lineAddress, int id) {
     emit updateLog(QString("Bus Read to a%1 from processor %2\n")
@@ -66,21 +53,27 @@ void Bus::BusRead(short lineAddress, int id) {
         }
     }
     short cache_line_num = processors[id]->getLFUcell(lineAddress);
+
+    // отправка в память в случае M или F
+    if (processors[id]->getCache()[cache_line_num].getState() == 'F' or
+        processors[id]->getCache()[cache_line_num].getState() == 'M')
+    {
+        writeDataToMemory(processors[id]->getCache()[cache_line_num].getAddress(),
+                          processors[id]->getCache()[cache_line_num].getData());
+    }
+
     if (!read_from_cache) {
         data = memory[lineAddress].getData();
         emit updateLog(QString("Read from memory\n"));
 
         // запись data в кэш
-        processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
-        processors[id]->getCache()[cache_line_num].updateData(data);
-        processors[id]->getCache()[cache_line_num].updateState('E');
+        writeDataToCache(id, cache_line_num, lineAddress, data, 'E');
+
         emit updateCacheView();
         return;
     }
     // запись data в кэш
-    processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
-    processors[id]->getCache()[cache_line_num].updateData(data);
-    processors[id]->getCache()[cache_line_num].updateState('F');
+    writeDataToCache(id, cache_line_num, lineAddress, data, 'F');
     emit updateCacheView();
 }
 
@@ -107,22 +100,37 @@ void Bus::BusRWITM(short lineAddress, int id) {
         }
     }
     short cache_line_num = processors[id]->getLFUcell(lineAddress);
+    // отправка в память в случае M или F
+    if (processors[id]->getCache()[cache_line_num].getState() == 'F' or
+        processors[id]->getCache()[cache_line_num].getState() == 'M')
+    {
+        writeDataToMemory(processors[id]->getCache()[cache_line_num].getAddress(),
+                          processors[id]->getCache()[cache_line_num].getData());
+    }
+
     if (!read_from_cache) {
         data = memory[lineAddress].getData();
         data++; // считали на запись -> увеличиваем значение
         emit updateLog(QString("Read from memory\n"));
         // запись data в кэш
-        processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
-        processors[id]->getCache()[cache_line_num].updateData(data);
-        processors[id]->getCache()[cache_line_num].updateState('M');
+        writeDataToCache(id, cache_line_num, lineAddress, data, 'M');
         emit updateCacheView();
         return;
     }
 
     data++; // считали на запись -> увеличиваем значение
     // запись data в кэш
+    writeDataToCache(id, cache_line_num, lineAddress, data, 'M');
+    emit updateCacheView();
+}
+
+void Bus::writeDataToCache(int id, short cache_line_num, short lineAddress, char data, char state) {
     processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
     processors[id]->getCache()[cache_line_num].updateData(data);
-    processors[id]->getCache()[cache_line_num].updateState('M');
-    emit updateCacheView();
+    processors[id]->getCache()[cache_line_num].updateState(state);
+}
+
+void Bus::writeDataToMemory(short lineAddress, char data) {
+    memory[lineAddress].updateData(data);
+    emit updateMemoryView();
 }
