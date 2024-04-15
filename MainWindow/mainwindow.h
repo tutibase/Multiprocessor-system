@@ -16,15 +16,21 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_read_0_0_clicked();
-    void on_write_0_0_clicked();
-    void on_read_0_1_clicked();
-    void on_write_0_1_clicked();
+    void on_read_0_clicked();
+    void on_write_0_clicked();
 
-    void on_read_1_0_clicked();
-    void on_write_1_0_clicked();
-    void on_read_1_1_clicked();
-    void on_write_1_1_clicked();
+
+    void on_read_1_clicked();
+
+    void on_write_1_clicked();
+
+    void on_read_2_clicked();
+
+    void on_write_2_clicked();
+
+    void on_read_3_clicked();
+
+    void on_write_3_clicked();
 
 private:
     Ui::MainWindow *ui;

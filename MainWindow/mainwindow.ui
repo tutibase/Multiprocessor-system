@@ -7,166 +7,764 @@
     <x>0</x>
     <y>0</y>
     <width>1224</width>
-    <height>644</height>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTextBrowser" name="textBrowser">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>256</width>
-      <height>192</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="read_0_0">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>430</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>read a0</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="read_0_1">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>480</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>read a1</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="write_0_0">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>430</y>
-      <width>131</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>write a0</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="write_0_1">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>480</y>
-      <width>131</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>write a1</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="write_1_1">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>480</y>
-      <width>131</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>write a1</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="read_1_1">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>480</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>read a1</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="read_1_0">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>430</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>read a0</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="write_1_0">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>430</y>
-      <width>131</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>write a0</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="CPU1">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>260</y>
-      <width>71</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CPU1</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="CPU0">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>270</y>
-      <width>55</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CPU0</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>290</y>
-      <width>281</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>I </string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_8">
+      <item>
+       <widget class="QTextBrowser" name="log"/>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Memory                                                                                                                                         </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QLabel" name="memory_0">
+              <property name="text">
+               <string>address: a0, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_1">
+              <property name="text">
+               <string>address: a1, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_2">
+              <property name="text">
+               <string>address: a2, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_3">
+              <property name="text">
+               <string>address: a3, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_4">
+              <property name="text">
+               <string>address: a4, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_5">
+              <property name="text">
+               <string>address: a5, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_6">
+              <property name="text">
+               <string>address: a6, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_7">
+              <property name="text">
+               <string>address: a7, data: 0</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QLabel" name="memory_8">
+              <property name="text">
+               <string>address: a8, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_9">
+              <property name="text">
+               <string>address: a9, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_10">
+              <property name="text">
+               <string>address: a10, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_11">
+              <property name="text">
+               <string>address: a11, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_12">
+              <property name="text">
+               <string>address: a12, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_13">
+              <property name="text">
+               <string>address: a13, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_14">
+              <property name="text">
+               <string>address: a14, data: 0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memory_15">
+              <property name="text">
+               <string>address: a15, data: 0</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="CPU_0">
+          <property name="text">
+           <string>CPU 0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_0_0">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_0_1">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_0_2">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_0_3">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox_0">
+          <item>
+           <property name="text">
+            <string>address: a0</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a5</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a6</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a7</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a8</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a9</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a11</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a12</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a13</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a14</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a15</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="read_0">
+            <property name="text">
+             <string>read</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="write_0">
+            <property name="text">
+             <string>write</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="CPU_1">
+          <property name="text">
+           <string>CPU 1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_1_0">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_1_1">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_1_2">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_1_3">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox_1">
+          <item>
+           <property name="text">
+            <string>address: a0</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a5</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a6</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a7</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a8</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a9</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a11</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a12</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a13</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a14</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a15</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QPushButton" name="read_1">
+            <property name="text">
+             <string>read</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="write_1">
+            <property name="text">
+             <string>write</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QLabel" name="CPU_2">
+          <property name="text">
+           <string>CPU 2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_2_0">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_2_1">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_2_2">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_2_3">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox_2">
+          <item>
+           <property name="text">
+            <string>address: a0</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a5</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a6</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a7</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a8</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a9</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a11</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a12</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a13</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a14</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a15</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QPushButton" name="read_2">
+            <property name="text">
+             <string>read</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="write_2">
+            <property name="text">
+             <string>write</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLabel" name="CPU_3">
+          <property name="text">
+           <string>CPU 3</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_3_0">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_3_1">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_3_2">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cache_3_3">
+          <property name="text">
+           <string>I </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox_3">
+          <item>
+           <property name="text">
+            <string>address: a0</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a5</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a6</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a7</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a8</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a9</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a11</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a12</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a13</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a14</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>address: a15</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QPushButton" name="read_3">
+            <property name="text">
+             <string>read</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="write_3">
+            <property name="text">
+             <string>write</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

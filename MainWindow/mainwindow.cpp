@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     bus = new Bus();
 
+    ui->log->insertPlainText("MESIF protocol with \"least frequently used\" replacement policy:\n");
+
     for (int i = 0; i < processors_num; i++) {
         QObject::connect(bus->processors[i], &Processor::BusInvalidate,
                          bus, &Bus::BusInvalidate);
@@ -23,39 +25,50 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_read_0_0_clicked() {
-    bus->processors[0]->readLine(0);
+void MainWindow::on_read_0_clicked() {
+    int address = ui->comboBox_0->currentIndex();
+    bus->processors[0]->readLine(address);
 }
 
-void MainWindow::on_write_0_0_clicked() {
-    bus->processors[0]->writeLine(0);
-}
-
-
-void MainWindow::on_read_0_1_clicked() {
-    bus->processors[0]->readLine(1);
-}
-
-void MainWindow::on_write_0_1_clicked() {
-    bus->processors[0]->writeLine(1);
+void MainWindow::on_write_0_clicked() {
+    int address = ui->comboBox_0->currentIndex();
+    bus->processors[0]->writeLine(address);
 }
 
 
 
-void MainWindow::on_read_1_0_clicked() {
-    bus->processors[1]->readLine(0);
+
+void MainWindow::on_read_1_clicked() {
+    int address = ui->comboBox_1->currentIndex();
+    bus->processors[1]->readLine(address);
 }
 
-void MainWindow::on_write_1_0_clicked() {
-    bus->processors[1]->writeLine(0);
+void MainWindow::on_write_1_clicked() {
+    int address = ui->comboBox_1->currentIndex();
+    bus->processors[1]->writeLine(address);
 }
 
 
-void MainWindow::on_read_1_1_clicked() {
-    bus->processors[1]->readLine(1);
+
+void MainWindow::on_read_2_clicked() {
+    int address = ui->comboBox_2->currentIndex();
+    bus->processors[2]->readLine(address);
 }
 
-void MainWindow::on_write_1_1_clicked() {
-    bus->processors[1]->writeLine(1);
+void MainWindow::on_write_2_clicked() {
+    int address = ui->comboBox_2->currentIndex();
+    bus->processors[2]->writeLine(address);
+}
+
+
+
+void MainWindow::on_read_3_clicked() {
+    int address = ui->comboBox_3->currentIndex();
+    bus->processors[3]->readLine(address);
+}
+
+void MainWindow::on_write_3_clicked() {
+    int address = ui->comboBox_3->currentIndex();
+    bus->processors[3]->writeLine(address);
 }
 
