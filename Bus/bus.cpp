@@ -63,18 +63,21 @@ void Bus::BusRead(short lineAddress, int id) {
             }
         }
     }
+    short cache_line_num = processors[id]->getLFUcell(lineAddress);
     if (!read_from_cache) {
         data = memory[lineAddress].getData();
         emit updateLog(QString("Read from memory\n"));
-        // добавить запись data в кэш
-        //processors[id]->getCache()[*some line_num from LFU*].updateData(data);
-        //processors[id]->getCache()[*some line_num from LFU*].updateState('E');
+        // запись data в кэш
+        processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
+        processors[id]->getCache()[cache_line_num].updateData(data);
+        processors[id]->getCache()[cache_line_num].updateState('E');
+        qDebug() << "qq";
         return;
     }
-
-    // добавить запись data в кэш
-    //processors[id]->getCache()[*some line_num from LFU*].updateData(data);
-    //processors[id]->getCache()[*some line_num from LFU*].updateState('F');
+    // запись data в кэш
+    processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
+    processors[id]->getCache()[cache_line_num].updateData(data);
+    processors[id]->getCache()[cache_line_num].updateState('F');
 }
 
 void Bus::BusRWITM(short lineAddress, int id) {
@@ -98,16 +101,21 @@ void Bus::BusRWITM(short lineAddress, int id) {
             }
         }
     }
+    short cache_line_num = processors[id]->getLFUcell(lineAddress);
     if (!read_from_cache) {
         data = memory[lineAddress].getData();
+        data++; // считали на запись -> увеличиваем значение
         emit updateLog(QString("Read from memory\n"));
-        // добавить запись data в кэш
-        //processors[id]->getCache()[*some line_num from LFU*].updateData(data);
-        //processors[id]->getCache()[*some line_num from LFU*].updateState('E');
+        // запись data в кэш
+        processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
+        processors[id]->getCache()[cache_line_num].updateData(data);
+        processors[id]->getCache()[cache_line_num].updateState('E');
         return;
     }
 
-    // добавить запись data в кэш
-    //processors[id]->getCache()[*some line_num from LFU*].updateData(data);
-    //processors[id]->getCache()[*some line_num from LFU*].updateState('F');
+    data++; // считали на запись -> увеличиваем значение
+    // запись data в кэш
+    processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
+    processors[id]->getCache()[cache_line_num].updateData(data);
+    processors[id]->getCache()[cache_line_num].updateState('F');
 }
