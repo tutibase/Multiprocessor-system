@@ -24,14 +24,14 @@ void Bus::BusInvalidate(short lineAddress, int id) {
             }
         }
     }
-    emit updateLog(QString("Bus Invalidate to a%1 from processor %2!")
+    emit updateLog(QString("Invalidate по адресу a%1 от CPU %2")
                 .arg(lineAddress).arg(id));
     emit updateCacheView();
 }
 
 
 void Bus::BusRead(short lineAddress, int id) {
-    emit updateLog(QString("Bus Read to a%1 from processor %2\n")
+    emit updateLog(QString("Чтение адреса a%1 на шине от CPU %2")
                 .arg(lineAddress).arg(id));
 
     char data = 0;
@@ -48,7 +48,7 @@ void Bus::BusRead(short lineAddress, int id) {
                 read_from_cache = 1;
 
                 emit updateCacheView();
-                emit updateLog(QString("Appropriate line in the processor's %1 cache\n").arg(i));
+                emit updateLog(QString("Найден подходящий адрес в кэше CPU %1").arg(i));
             }
         }
     }
@@ -58,27 +58,31 @@ void Bus::BusRead(short lineAddress, int id) {
     if (processors[id]->getCache()[cache_line_num].getState() == 'F' or
         processors[id]->getCache()[cache_line_num].getState() == 'M')
     {
+        emit updateLog(QString("Отправка в память адреса a%1 от CPU %2")
+                       .arg(processors[id]->getCache()[cache_line_num].getAddress()).arg(id));
         writeDataToMemory(processors[id]->getCache()[cache_line_num].getAddress(),
                           processors[id]->getCache()[cache_line_num].getData());
     }
 
     if (!read_from_cache) {
         data = memory[lineAddress].getData();
-        emit updateLog(QString("Read from memory\n"));
+        emit updateLog(QString("Нет подходящих адресов в кэше CPU, чтение из памяти"));
 
         // запись data в кэш
         writeDataToCache(id, cache_line_num, lineAddress, data, 'E');
 
         emit updateCacheView();
+        emit updateLog("Конец шинного цикла\n");
         return;
     }
     // запись data в кэш
     writeDataToCache(id, cache_line_num, lineAddress, data, 'F');
     emit updateCacheView();
+    emit updateLog("Конец шинного цикла\n");
 }
 
 void Bus::BusRWITM(short lineAddress, int id) {
-    emit updateLog(QString("Bus RWITM to a%1 from processor %2\n")
+    emit updateLog(QString("RWITM адреса a%1 на шине от CPU %2")
                 .arg(lineAddress).arg(id));
 
     char data = 0;
@@ -95,7 +99,7 @@ void Bus::BusRWITM(short lineAddress, int id) {
                 emit updateCacheView();
                 read_from_cache = 1;
 
-                emit updateLog(QString("Invalidate line in the processor's %1 cache\n").arg(i));
+                emit updateLog(QString("Invalidate адреса a%1 в кэше CPU %2").arg(lineAddress).arg(i));
             }
         }
     }
@@ -104,6 +108,8 @@ void Bus::BusRWITM(short lineAddress, int id) {
     if (processors[id]->getCache()[cache_line_num].getState() == 'F' or
         processors[id]->getCache()[cache_line_num].getState() == 'M')
     {
+        emit updateLog(QString("Отправка в память адреса a%1 от CPU %2")
+                       .arg(processors[id]->getCache()[cache_line_num].getAddress()).arg(id));
         writeDataToMemory(processors[id]->getCache()[cache_line_num].getAddress(),
                           processors[id]->getCache()[cache_line_num].getData());
     }
@@ -111,20 +117,23 @@ void Bus::BusRWITM(short lineAddress, int id) {
     if (!read_from_cache) {
         data = memory[lineAddress].getData();
         data++; // считали на запись -> увеличиваем значение
-        emit updateLog(QString("Read from memory\n"));
+        emit updateLog(QString("Нет подходящих адресов в кэше CPU, чтение из памяти"));
         // запись data в кэш
         writeDataToCache(id, cache_line_num, lineAddress, data, 'M');
         emit updateCacheView();
+        emit updateLog("Конец шинного цикла\n");
         return;
     }
 
     data++; // считали на запись -> увеличиваем значение
     // запись data в кэш
     writeDataToCache(id, cache_line_num, lineAddress, data, 'M');
+    emit updateLog("Конец шинного цикла\n");
     emit updateCacheView();
 }
 
 void Bus::writeDataToCache(int id, short cache_line_num, short lineAddress, char data, char state) {
+    emit updateLog(QString("Запись a%1 в кэш CPU %2").arg(lineAddress).arg(id));
     processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
     processors[id]->getCache()[cache_line_num].updateData(data);
     processors[id]->getCache()[cache_line_num].updateState(state);

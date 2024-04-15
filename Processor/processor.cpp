@@ -68,11 +68,12 @@ void Processor::writeLine(short write_address) {
                 Cache[i].incrementData();
                 Cache[i].updateState('M');
                 write_hit = 1;
-                emit updateLog(QString("Данные ячейки a%1 перезаписаны с %2 на %3 в CPU %3,"
+                emit updateLog(QString("Данные ячейки a%1 перезаписаны с %2 на %3 в CPU %4,"
                                     " на шину отправлен Invalidate a%1").arg(write_address)
                             .arg(+Cache[i].getData()-1).arg(+Cache[i].getData()).arg(id));
 
                 emit BusInvalidate(write_address, id);
+                emit updateLog("Конец шинного цикла\n");
                 break;
             }
 
@@ -98,6 +99,10 @@ short Processor::getLFUcell(short address) {
                 return i;
             }
 
+            if (Cache[i].getState() == 'I') {
+                return i;
+            }
+
             if (requests_num[Cache[i].getAddress()] < min_used) {
                 min_used = requests_num[Cache[i].getAddress()];
                 result = i;
@@ -107,6 +112,10 @@ short Processor::getLFUcell(short address) {
     else {
         for (int i = cache_lines_num/2; i < cache_lines_num; i++) {
             if (Cache[i].getAddress() == address) {
+                return i;
+            }
+
+            if (Cache[i].getState() == 'I') {
                 return i;
             }
 
