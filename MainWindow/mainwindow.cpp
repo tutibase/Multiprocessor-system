@@ -143,5 +143,36 @@ void MainWindow::updateCache() {
 }
 
 void MainWindow::updateMemory() {
-
+    auto mem = bus->memory[0];
+    ui->memory_0->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[1];
+    ui->memory_1->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[2];
+    ui->memory_2->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[3];
+    ui->memory_3->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[4];
+    ui->memory_4->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[5];
+    ui->memory_5->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[6];
+    ui->memory_6->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[7];
+    ui->memory_7->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[8];
+    ui->memory_8->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[9];
+    ui->memory_9->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[10];
+    ui->memory_10->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[11];
+    ui->memory_11->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[12];
+    ui->memory_12->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[13];
+    ui->memory_13->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[14];
+    ui->memory_14->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
+    mem = bus->memory[15];
+    ui->memory_15->setText(QString("a%1 | %2").arg(mem.getAddress()).arg(+mem.getData()));
 }
