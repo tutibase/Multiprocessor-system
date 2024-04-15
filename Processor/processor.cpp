@@ -31,7 +31,7 @@ void Processor::readLine(short read_address) {
 
     if (!read_hit) {
         // строка в состоянии Invalid (Read Miss) -> считываем с шины
-        emit updateLog(QString("Read Miss, запрос на чтение на шину"));
+        emit updateLog(QString("Read Miss"));
         emit BusRead(read_address, id);
     }
 
@@ -83,7 +83,7 @@ void Processor::writeLine(short write_address) {
 
     if (!write_hit) {
         // строка в состоянии Invalid (Write Miss) -> RWITM (считываем с намерением изменить)
-        emit updateLog(QString("Write Miss, запрос на RWITM на шину"));
+        emit updateLog(QString("Write Miss"));
         emit BusRWITM(write_address, id);
     }
     emit updateCacheView();

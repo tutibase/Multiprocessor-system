@@ -31,6 +31,19 @@ void Bus::BusInvalidate(short lineAddress, int id) {
 
 
 void Bus::BusRead(short lineAddress, int id) {
+
+    short cache_line_num = processors[id]->getLFUcell(lineAddress);
+
+    // отправка в память в случае M или F
+    if (processors[id]->getCache()[cache_line_num].getState() == 'F' or
+        processors[id]->getCache()[cache_line_num].getState() == 'M')
+    {
+        emit updateLog(QString("Отправка в память адреса a%1 от CPU %2\nКонец шинного цикла\n")
+                       .arg(processors[id]->getCache()[cache_line_num].getAddress()).arg(id));
+        writeDataToMemory(processors[id]->getCache()[cache_line_num].getAddress(),
+                          processors[id]->getCache()[cache_line_num].getData());
+    }
+
     emit updateLog(QString("Чтение адреса a%1 на шине от CPU %2")
                 .arg(lineAddress).arg(id));
 
@@ -52,17 +65,6 @@ void Bus::BusRead(short lineAddress, int id) {
             }
         }
     }
-    short cache_line_num = processors[id]->getLFUcell(lineAddress);
-
-    // отправка в память в случае M или F
-    if (processors[id]->getCache()[cache_line_num].getState() == 'F' or
-        processors[id]->getCache()[cache_line_num].getState() == 'M')
-    {
-        emit updateLog(QString("Отправка в память адреса a%1 от CPU %2")
-                       .arg(processors[id]->getCache()[cache_line_num].getAddress()).arg(id));
-        writeDataToMemory(processors[id]->getCache()[cache_line_num].getAddress(),
-                          processors[id]->getCache()[cache_line_num].getData());
-    }
 
     if (!read_from_cache) {
         data = memory[lineAddress].getData();
@@ -82,6 +84,18 @@ void Bus::BusRead(short lineAddress, int id) {
 }
 
 void Bus::BusRWITM(short lineAddress, int id) {
+
+    short cache_line_num = processors[id]->getLFUcell(lineAddress);
+    // отправка в память в случае M или F
+    if (processors[id]->getCache()[cache_line_num].getState() == 'F' or
+        processors[id]->getCache()[cache_line_num].getState() == 'M')
+    {
+        emit updateLog(QString("Отправка в память адреса a%1 от CPU %2\nКонец шинного цикла\n")
+                       .arg(processors[id]->getCache()[cache_line_num].getAddress()).arg(id));
+        writeDataToMemory(processors[id]->getCache()[cache_line_num].getAddress(),
+                          processors[id]->getCache()[cache_line_num].getData());
+    }
+
     emit updateLog(QString("RWITM адреса a%1 на шине от CPU %2")
                 .arg(lineAddress).arg(id));
 
@@ -102,16 +116,6 @@ void Bus::BusRWITM(short lineAddress, int id) {
                 emit updateLog(QString("Invalidate адреса a%1 в кэше CPU %2").arg(lineAddress).arg(i));
             }
         }
-    }
-    short cache_line_num = processors[id]->getLFUcell(lineAddress);
-    // отправка в память в случае M или F
-    if (processors[id]->getCache()[cache_line_num].getState() == 'F' or
-        processors[id]->getCache()[cache_line_num].getState() == 'M')
-    {
-        emit updateLog(QString("Отправка в память адреса a%1 от CPU %2")
-                       .arg(processors[id]->getCache()[cache_line_num].getAddress()).arg(id));
-        writeDataToMemory(processors[id]->getCache()[cache_line_num].getAddress(),
-                          processors[id]->getCache()[cache_line_num].getData());
     }
 
     if (!read_from_cache) {
