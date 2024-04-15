@@ -2,11 +2,15 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
+#include <QVector>
 #include "../Bus/bus.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+using CacheLabels = QVector<QLabel*>;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -42,6 +46,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Bus *bus;
+    QVector<CacheLabels> CPULabels;
 
 };
 #endif // MAINWINDOW_H
