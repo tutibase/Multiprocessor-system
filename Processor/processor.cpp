@@ -80,5 +80,6 @@ void Processor::writeLine(short write_address) {
     if (!write_hit) {
         // строка в состоянии Invalid (Write Miss) -> RWITM (считываем с намерением изменить)
     }
+    emit updateCacheView();
 
 }

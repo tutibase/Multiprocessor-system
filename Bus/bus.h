@@ -13,6 +13,8 @@ public:
 
 signals:
     void updateLog(QString msg); // сообщение в лог
+    void updateCacheView();
+    void updateMemoryView();
 
 public slots:
     // инвалидация всех ячеек в кэшах с данным адресом, кроме отправившего сигнал процессора
