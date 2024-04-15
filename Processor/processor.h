@@ -21,7 +21,10 @@ public:
 
 signals:
     void BusInvalidate(short lineAddress, int id); // сигнал на шину об инвалидации всех ячеек в кэшах с данным адресом
-    void BusShared(short lineAddress); // сигнал на шину о переходе всех ячеек в кэшах с данным адресом в состояние Shared
+    //void BusShared(short lineAddress); // сигнал на шину о переходе всех ячеек в кэшах с данным адресом в состояние Shared
+    void BusRead(short lineAddress, int id); // сигнал на шину о необходимости чтения в кэш процессора ячейки памяти
+    void BusRWITM(short lineAddress, int id); // сигнал на шину о необходимости RWITM в кэш процессора ячейки памяти
+    void updateLog(QString msg); // отправить сообщение в лог
 
 private:
     // первая половина ячеек кэша под четные адреса памяти, вторая - нечетные

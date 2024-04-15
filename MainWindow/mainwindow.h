@@ -15,6 +15,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void updateLog(QString msg);
+
 private slots:
     void on_read_0_clicked();
     void on_write_0_clicked();

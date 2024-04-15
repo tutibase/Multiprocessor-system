@@ -6,7 +6,7 @@ Processor::Processor(int id) {
 
     this->Cache = {};
     for (int i = 0; i < cache_lines_num; i++) {
-        this->Cache.push_back(CacheLine(i, 'I'));
+        this->Cache.push_back(CacheLine(i, 'S'));
     }
 }
 
@@ -21,7 +21,7 @@ void Processor::readLine(short read_address) {
             char state = Cache[i].getState();
             if (state == 'M' or state == 'E' or
                 state == 'S' or state == 'F') {
-                qDebug() << QString("Read Hit, данные ячейки a%1 переданы в процессор").arg(read_address);
+                emit updateLog(QString("Read Hit, данные ячейки a%1 переданы в процессор").arg(read_address));
                 read_hit = true; // обозначаем, что у нас Read Hit
             }
             break; // в кэше точно больше не будет нужной строки -> выходим
@@ -30,6 +30,7 @@ void Processor::readLine(short read_address) {
 
     if (!read_hit) {
         // строка в состоянии Invalid (Read Miss) -> считываем с шины
+        emit BusRead(read_address, id);
     }
 
 }
@@ -48,16 +49,16 @@ void Processor::writeLine(short write_address) {
             case 'M':
                 Cache[i].incrementData();
                 write_hit = 1;
-                qDebug() << QString("Данные ячейки a%1 перезаписаны с %2 на %3").arg(write_address)
-                            .arg(+Cache[i].getData()-1).arg(+Cache[i].getData());
+                emit updateLog(QString("Данные ячейки a%1 перезаписаны с %2 на %3").arg(write_address)
+                            .arg(+Cache[i].getData()-1).arg(+Cache[i].getData()));
                 break;
 
             case 'E':
                 Cache[i].incrementData();
                 Cache[i].updateState('M');
                 write_hit = 1;
-                qDebug() << QString("Данные ячейки a%1 перезаписаны с %2 на %3").arg(write_address)
-                            .arg(+Cache[i].getData()-1).arg(+Cache[i].getData());
+                emit updateLog(QString("Данные ячейки a%1 перезаписаны с %2 на %3").arg(write_address)
+                            .arg(+Cache[i].getData()-1).arg(+Cache[i].getData()));
                 break;
 
             case 'S':
@@ -65,9 +66,9 @@ void Processor::writeLine(short write_address) {
                 Cache[i].incrementData();
                 Cache[i].updateState('M');
                 write_hit = 1;
-                qDebug() << QString("Данные ячейки a%1 перезаписаны с %2 на %3,"
+                emit updateLog(QString("Данные ячейки a%1 перезаписаны с %2 на %3,"
                                     " на шину отправлен Invalidate").arg(write_address)
-                                    .arg(+Cache[i].getData()-1).arg(+Cache[i].getData());
+                                    .arg(+Cache[i].getData()-1).arg(+Cache[i].getData()));
                 emit BusInvalidate(write_address, id);
                 break;
             }

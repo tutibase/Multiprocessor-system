@@ -14,9 +14,18 @@ MainWindow::MainWindow(QWidget *parent)
         QObject::connect(bus->processors[i], &Processor::BusInvalidate,
                          bus, &Bus::BusInvalidate);
 
-        QObject::connect(bus->processors[i], &Processor::BusShared,
-                         bus, &Bus::BusShared);
+        /*QObject::connect(bus->processors[i], &Processor::BusShared,
+                         bus, &Bus::BusShared);*/
+
+        QObject::connect(bus->processors[i], &Processor::BusRead,
+                         bus, &Bus::BusRead);
+        QObject::connect(bus->processors[i], &Processor::BusRWITM,
+                         bus, &Bus::BusRWITM);
+        QObject::connect(bus->processors[i], &Processor::updateLog,
+                         bus, &Bus::updateLogSlot);
     }
+    QObject::connect(bus, &Bus::updateLog,
+                     this, &MainWindow::updateLog);
 }
 
 MainWindow::~MainWindow()
@@ -24,6 +33,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::updateLog(QString msg) {
+    ui->log->insertPlainText('\n' + msg);
+}
 
 void MainWindow::on_read_0_clicked() {
     int address = ui->comboBox_0->currentIndex();
