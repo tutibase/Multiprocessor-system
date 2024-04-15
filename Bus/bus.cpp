@@ -74,7 +74,6 @@ void Bus::BusRead(short lineAddress, int id) {
         processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
         processors[id]->getCache()[cache_line_num].updateData(data);
         processors[id]->getCache()[cache_line_num].updateState('E');
-        qDebug() << "qq";
         emit updateCacheView();
         return;
     }
@@ -115,7 +114,7 @@ void Bus::BusRWITM(short lineAddress, int id) {
         // запись data в кэш
         processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
         processors[id]->getCache()[cache_line_num].updateData(data);
-        processors[id]->getCache()[cache_line_num].updateState('E');
+        processors[id]->getCache()[cache_line_num].updateState('M');
         emit updateCacheView();
         return;
     }
@@ -124,6 +123,6 @@ void Bus::BusRWITM(short lineAddress, int id) {
     // запись data в кэш
     processors[id]->getCache()[cache_line_num].updateAddress(lineAddress);
     processors[id]->getCache()[cache_line_num].updateData(data);
-    processors[id]->getCache()[cache_line_num].updateState('F');
+    processors[id]->getCache()[cache_line_num].updateState('M');
     emit updateCacheView();
 }

@@ -5,9 +5,10 @@ Processor::Processor(int id) {
     this->requests_num = std::vector<int>(memory_cells_num, 0);
 
     this->Cache = {};
-    for (int i = 0; i < cache_lines_num; i++) {
-        this->Cache.push_back(CacheLine(i, 'I'));
-    }
+    this->Cache.push_back(CacheLine(0, 'I'));
+    this->Cache.push_back(CacheLine(2, 'I'));
+    this->Cache.push_back(CacheLine(1, 'I'));
+    this->Cache.push_back(CacheLine(3, 'I'));
 }
 
 void Processor::readLine(short read_address) {
@@ -88,15 +89,30 @@ void Processor::writeLine(short write_address) {
 short Processor::getLFUcell(short address) {
     int min_used = INT_MAX;
     short result = 0;
-    for (int i = address % 2; i < cache_lines_num; i+=2) {
-        if (Cache[i].getAddress() == address) {
-            return i;
-        }
+    if (address % 2 == 0) {
+        for (int i = 0; i < cache_lines_num/2; i++) {
+            if (Cache[i].getAddress() == address) {
+                return i;
+            }
 
-        if (requests_num[i] < min_used) {
-            min_used = requests_num[i];
-            result = i;
+            if (requests_num[Cache[i].getAddress()] < min_used) {
+                min_used = requests_num[Cache[i].getAddress()];
+                result = i;
+            }
         }
     }
+    else {
+        for (int i = cache_lines_num/2; i < cache_lines_num; i++) {
+            if (Cache[i].getAddress() == address) {
+                return i;
+            }
+
+            if (requests_num[Cache[i].getAddress()] < min_used) {
+                min_used = requests_num[Cache[i].getAddress()];
+                result = i;
+            }
+        }
+    }
+
     return result;
 }
