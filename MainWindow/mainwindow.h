@@ -35,6 +35,10 @@ private slots:
 
     void on_write_3_clicked();
 
+    void updateCache();
+
+    void updateMemory();
+
 private:
     Ui::MainWindow *ui;
     Bus *bus;
