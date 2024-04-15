@@ -47,6 +47,7 @@ private:
     Ui::MainWindow *ui;
     Bus *bus;
     QVector<CacheLabels> CPULabels;
+    QVector<QLabel*> memory_labels;
 
 };
 #endif // MAINWINDOW_H
