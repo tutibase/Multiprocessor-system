@@ -19,6 +19,8 @@ public:
 
     std::vector<CacheLine>& getCache() { return Cache; }
     short getId() { return id; }
+    // номер ячейки в кэше, вместо которой можно записать данные адреса
+    short getLFUcell(short address);
 
 signals:
     void BusInvalidate(short lineAddress, int id); // сигнал на шину об инвалидации всех ячеек в кэшах с данным адресом

@@ -8,6 +8,7 @@ public:
     MemoryLine(short address);
 
     void updateData(char data);
+    void updateAddress(short address);
     void incrementData();
 
     char getData() { return data; }

@@ -13,3 +13,7 @@ void MemoryLine::updateData(char data){
 void MemoryLine::incrementData() {
     updateData(this->data + 1);
 }
+
+void MemoryLine::updateAddress(short address){
+    this->address = address;
+}

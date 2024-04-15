@@ -6,7 +6,7 @@ Processor::Processor(int id) {
 
     this->Cache = {};
     for (int i = 0; i < cache_lines_num; i++) {
-        this->Cache.push_back(CacheLine(i, 'S'));
+        this->Cache.push_back(CacheLine(i, 'I'));
     }
 }
 
@@ -79,7 +79,24 @@ void Processor::writeLine(short write_address) {
 
     if (!write_hit) {
         // строка в состоянии Invalid (Write Miss) -> RWITM (считываем с намерением изменить)
+        emit BusRWITM(write_address, id);
     }
     emit updateCacheView();
 
+}
+
+short Processor::getLFUcell(short address) {
+    int min_used = INT_MAX;
+    short result = 0;
+    for (int i = address % 2; i < cache_lines_num; i+=2) {
+        if (Cache[i].getAddress() == address) {
+            return i;
+        }
+
+        if (requests_num[i] < min_used) {
+            min_used = requests_num[i];
+            result = i;
+        }
+    }
+    return result;
 }
