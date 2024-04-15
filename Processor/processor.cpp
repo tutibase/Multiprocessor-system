@@ -95,8 +95,8 @@ short Processor::getLFUcell(short address) {
                 return i;
             }
 
-            if (requests_num[i] < min_used) {
-                min_used = requests_num[i];
+            if (requests_num[Cache[i].getAddress()] < min_used) {
+                min_used = requests_num[Cache[i].getAddress()];
                 result = i;
             }
         }
@@ -107,8 +107,8 @@ short Processor::getLFUcell(short address) {
                 return i;
             }
 
-            if (requests_num[i] < min_used) {
-                min_used = requests_num[i];
+            if (requests_num[Cache[i].getAddress()] < min_used) {
+                min_used = requests_num[Cache[i].getAddress()];
                 result = i;
             }
         }
