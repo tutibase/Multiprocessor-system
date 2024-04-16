@@ -72,13 +72,11 @@ void Bus::BusRead(short lineAddress, int id) {
 
         // запись data в кэш
         writeDataToCache(id, cache_line_num, lineAddress, data, 'E');
-
-        emit updateCacheView();
-        emit updateLog("Конец шинного цикла\n");
-        return;
+    } else {
+        // запись data в кэш
+        writeDataToCache(id, cache_line_num, lineAddress, data, 'F');
     }
-    // запись data в кэш
-    writeDataToCache(id, cache_line_num, lineAddress, data, 'F');
+
     emit updateCacheView();
     emit updateLog("Конец шинного цикла\n");
 }
@@ -120,13 +118,7 @@ void Bus::BusRWITM(short lineAddress, int id) {
 
     if (!read_from_cache) {
         data = memory[lineAddress].getData();
-        data++; // считали на запись -> увеличиваем значение
         emit updateLog(QString("Нет подходящих адресов в кэше CPU, чтение из памяти"));
-        // запись data в кэш
-        writeDataToCache(id, cache_line_num, lineAddress, data, 'M');
-        emit updateCacheView();
-        emit updateLog("Конец шинного цикла\n");
-        return;
     }
 
     data++; // считали на запись -> увеличиваем значение
