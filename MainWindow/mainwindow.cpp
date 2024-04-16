@@ -34,7 +34,17 @@ MainWindow::MainWindow(QWidget *parent)
                          this, &MainWindow::updateCache);
     }
 
+    ui->verticalLayout->addWidget(new QLabel("Section 0"));
+    ui->verticalLayout_2->addWidget(new QLabel("Section 0"));
+    ui->verticalLayout_3->addWidget(new QLabel("Section 0"));
+    ui->verticalLayout_4->addWidget(new QLabel("Section 0"));
     for (int i = 0; i < cache_lines_num; i++) {
+        if (i == cache_lines_num / 2) {
+            ui->verticalLayout->addWidget(new QLabel("Section 1"));
+            ui->verticalLayout_2->addWidget(new QLabel("Section 1"));
+            ui->verticalLayout_3->addWidget(new QLabel("Section 1"));
+            ui->verticalLayout_4->addWidget(new QLabel("Section 1"));
+        }
         ui->verticalLayout->addWidget(CPULabels[0][i]);
         ui->verticalLayout_2->addWidget(CPULabels[1][i]);
         ui->verticalLayout_3->addWidget(CPULabels[2][i]);
