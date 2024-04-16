@@ -159,9 +159,13 @@ void MainWindow::updateCache() {
             auto cache = bus->processors[i]->getCache()[j];
             if (cache.getAddress() == -1)
                 CPULabels[i][j]->setText(QString("I"));
-            else
-                CPULabels[i][j]->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                                             .arg(cache.getAddress()).arg(+cache.getData()));
+            else {
+                std::bitset<4> addr_tag(cache.getAddress());
+                CPULabels[i][j]->setText(QString("%1 | %2 | %3\t\taddress: a%4").arg(cache.getState())
+                                             .arg(QString::fromStdString(addr_tag.to_string()))
+                                             .arg(+cache.getData())
+                                             .arg(cache.getAddress()));
+            }
         }
     }
 

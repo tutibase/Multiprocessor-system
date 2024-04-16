@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QVector>
 #include <QPair>
+#include <bitset>
 #include "../Bus/bus.h"
 
 QT_BEGIN_NAMESPACE
