@@ -54,12 +54,15 @@ private slots:
 
     void on_confirm_button_clicked();
 
+    void increaseBusCycles();
+
 private:
     Ui::MainWindow *ui;
     Bus *bus;
     QVector<CacheLabels> CPULabels;
     QVector<QLabel*> memory_labels;
     QVector<QPair<Caller, int>> callings;
+    int bus_cycles;
 
 };
 #endif // MAINWINDOW_H

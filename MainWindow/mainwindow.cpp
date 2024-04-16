@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     bus = new Bus();
+    bus_cycles = 0;
 
     ui->log->insertPlainText("MESIF protocol with \"least frequently used\" replacement policy:\n");
 
@@ -32,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
                          bus, &Bus::updateLogSlot);
         QObject::connect(bus->processors[i], &Processor::updateCacheView,
                          this, &MainWindow::updateCache);
+        QObject::connect(bus->processors[i], &Processor::endBusCycle,
+                         this, &MainWindow::increaseBusCycles);
     }
 
     ui->verticalLayout->addWidget(new QLabel("Section 0"));
@@ -65,6 +68,8 @@ MainWindow::MainWindow(QWidget *parent)
                      this, &MainWindow::updateLog);
     QObject::connect(bus, &Bus::updateCacheView, this, &MainWindow::updateCache);
     QObject::connect(bus, &Bus::updateMemoryView, this, &MainWindow::updateMemory);
+
+    QObject::connect(bus, &Bus::endBusCycle, this, &MainWindow::increaseBusCycles);
 }
 
 MainWindow::~MainWindow()
@@ -207,3 +212,6 @@ void MainWindow::on_confirm_button_clicked()
     callings.clear();
 }
 
+void MainWindow::increaseBusCycles() {
+    ui->bus_cycles_label->setText("Bus cycles: " + QString::number(++bus_cycles));
+}

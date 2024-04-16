@@ -40,6 +40,7 @@ void Bus::BusRead(short lineAddress, int id) {
     {
         emit updateLog(QString("Отправка в память адреса a%1 от CPU %2\nКонец шинного цикла\n")
                        .arg(processors[id]->getCache()[cache_line_num].getAddress()).arg(id));
+        emit endBusCycle();
         writeDataToMemory(processors[id]->getCache()[cache_line_num].getAddress(),
                           processors[id]->getCache()[cache_line_num].getData());
     }
@@ -79,6 +80,7 @@ void Bus::BusRead(short lineAddress, int id) {
 
     emit updateCacheView();
     emit updateLog("Конец шинного цикла\n");
+    emit endBusCycle();
 }
 
 void Bus::BusRWITM(short lineAddress, int id) {
@@ -90,6 +92,7 @@ void Bus::BusRWITM(short lineAddress, int id) {
     {
         emit updateLog(QString("Отправка в память адреса a%1 от CPU %2\nКонец шинного цикла\n")
                        .arg(processors[id]->getCache()[cache_line_num].getAddress()).arg(id));
+        emit endBusCycle();
         writeDataToMemory(processors[id]->getCache()[cache_line_num].getAddress(),
                           processors[id]->getCache()[cache_line_num].getData());
     }
@@ -125,6 +128,7 @@ void Bus::BusRWITM(short lineAddress, int id) {
     // запись data в кэш
     writeDataToCache(id, cache_line_num, lineAddress, data, 'M');
     emit updateLog("Конец шинного цикла\n");
+    emit endBusCycle();
     emit updateCacheView();
 }
 

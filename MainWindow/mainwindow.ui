@@ -38,9 +38,22 @@
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Memory                                                                                                                                         </string>
+           <string>&lt;b&gt;Memory&lt;b&gt;</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -76,7 +89,7 @@
         <item>
          <widget class="QLabel" name="CPU_0">
           <property name="text">
-           <string>CPU 0</string>
+           <string>&lt;b&gt;CPU 0&lt;b&gt;</string>
           </property>
          </widget>
         </item>
@@ -189,7 +202,7 @@
         <item>
          <widget class="QLabel" name="CPU_1">
           <property name="text">
-           <string>CPU 1</string>
+           <string>&lt;b&gt;CPU 1&lt;b&gt;</string>
           </property>
          </widget>
         </item>
@@ -302,7 +315,7 @@
         <item>
          <widget class="QLabel" name="CPU_2">
           <property name="text">
-           <string>CPU 2</string>
+           <string>&lt;b&gt;CPU 2&lt;b&gt;</string>
           </property>
          </widget>
         </item>
@@ -415,7 +428,7 @@
         <item>
          <widget class="QLabel" name="CPU_3">
           <property name="text">
-           <string>CPU 3</string>
+           <string>&lt;b&gt;CPU 3&lt;b&gt;</string>
           </property>
          </widget>
         </item>
@@ -525,6 +538,13 @@
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QLabel" name="bus_cycles_label">
+          <property name="text">
+           <string>Bus cycles: 0</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QCheckBox" name="sim_call_box">
           <property name="text">

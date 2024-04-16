@@ -73,6 +73,7 @@ void Processor::writeLine(short write_address) {
 
                 emit BusInvalidate(write_address, id);
                 emit updateLog("Конец шинного цикла\n");
+                emit endBusCycle();
                 break;
             }
 
