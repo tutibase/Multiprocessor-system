@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QVector>
+#include <QPair>
 #include "../Bus/bus.h"
 
 QT_BEGIN_NAMESPACE
@@ -11,6 +12,11 @@ namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 using CacheLabels = QVector<QLabel*>;
+enum Clicking {
+    Read,
+    Write
+};
+using Caller = QPair<int, Clicking>;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -43,11 +49,16 @@ private slots:
 
     void updateMemory();
 
+    void on_sim_call_box_stateChanged(int state);
+
+    void on_confirm_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     Bus *bus;
     QVector<CacheLabels> CPULabels;
     QVector<QLabel*> memory_labels;
+    QVector<QPair<Caller, int>> callings;
 
 };
 #endif // MAINWINDOW_H

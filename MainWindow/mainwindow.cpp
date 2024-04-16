@@ -68,12 +68,22 @@ void MainWindow::updateLog(QString msg) {
 
 void MainWindow::on_read_0_clicked() {
     int address = ui->comboBox_0->currentIndex();
-    bus->processors[0]->readLine(address);
+    if (ui->sim_call_box->checkState() == Qt::CheckState::Checked) {
+        callings.push_back(QPair<Caller, int>(Caller(0, Clicking::Read), address));
+    }
+    else {
+        bus->processors[0]->readLine(address);
+    }
 }
 
 void MainWindow::on_write_0_clicked() {
     int address = ui->comboBox_0->currentIndex();
-    bus->processors[0]->writeLine(address);
+    if (ui->sim_call_box->checkState() == Qt::CheckState::Checked) {
+        callings.push_back(QPair<Caller, int>(Caller(0, Clicking::Write), address));
+    }
+    else {
+        bus->processors[0]->writeLine(address);
+    }
 }
 
 
@@ -81,44 +91,77 @@ void MainWindow::on_write_0_clicked() {
 
 void MainWindow::on_read_1_clicked() {
     int address = ui->comboBox_1->currentIndex();
-    bus->processors[1]->readLine(address);
+    if (ui->sim_call_box->checkState() == Qt::CheckState::Checked) {
+        callings.push_back(QPair<Caller, int>(Caller(1, Clicking::Read), address));
+    }
+    else {
+        bus->processors[1]->readLine(address);
+    }
 }
 
 void MainWindow::on_write_1_clicked() {
     int address = ui->comboBox_1->currentIndex();
-    bus->processors[1]->writeLine(address);
+    if (ui->sim_call_box->checkState() == Qt::CheckState::Checked) {
+        callings.push_back(QPair<Caller, int>(Caller(1, Clicking::Write), address));
+    }
+    else {
+        bus->processors[1]->writeLine(address);
+    }
 }
 
 
 
 void MainWindow::on_read_2_clicked() {
     int address = ui->comboBox_2->currentIndex();
-    bus->processors[2]->readLine(address);
+    if (ui->sim_call_box->checkState() == Qt::CheckState::Checked) {
+        callings.push_back(QPair<Caller, int>(Caller(2, Clicking::Read), address));
+    }
+    else {
+        bus->processors[2]->readLine(address);
+    }
 }
 
 void MainWindow::on_write_2_clicked() {
     int address = ui->comboBox_2->currentIndex();
-    bus->processors[2]->writeLine(address);
+    if (ui->sim_call_box->checkState() == Qt::CheckState::Checked) {
+        callings.push_back(QPair<Caller, int>(Caller(2, Clicking::Write), address));
+    }
+    else {
+        bus->processors[2]->writeLine(address);
+    }
 }
 
 
 
 void MainWindow::on_read_3_clicked() {
     int address = ui->comboBox_3->currentIndex();
-    bus->processors[3]->readLine(address);
+    if (ui->sim_call_box->checkState() == Qt::CheckState::Checked) {
+        callings.push_back(QPair<Caller, int>(Caller(3, Clicking::Read), address));
+    }
+    else {
+        bus->processors[3]->readLine(address);
+    }
 }
 
 void MainWindow::on_write_3_clicked() {
     int address = ui->comboBox_3->currentIndex();
-    bus->processors[3]->writeLine(address);
+    if (ui->sim_call_box->checkState() == Qt::CheckState::Checked) {
+        callings.push_back(QPair<Caller, int>(Caller(3, Clicking::Write), address));
+    }
+    else {
+        bus->processors[3]->writeLine(address);
+    }
 }
 
 void MainWindow::updateCache() {
     for (int i = 0; i < processors_num; i++) {
         for (int j = 0; j < cache_lines_num; j++) {
             auto cache = bus->processors[i]->getCache()[j];
-            CPULabels[i][j]->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                                         .arg(cache.getAddress()).arg(+cache.getData()));
+            if (cache.getAddress() == -1)
+                CPULabels[i][j]->setText(QString("I"));
+            else
+                CPULabels[i][j]->setText(QString("%1 | a%2 | %3").arg(cache.getState())
+                                             .arg(cache.getAddress()).arg(+cache.getData()));
         }
     }
 
@@ -130,3 +173,23 @@ void MainWindow::updateMemory() {
         memory_labels[i]->setText(QString("address: a%1, data: %2").arg(i).arg(+mem.getData()));
     }
 }
+
+void MainWindow::on_sim_call_box_stateChanged(int state)
+{
+    if (state == Qt::CheckState::Unchecked) callings.clear();
+}
+
+
+void MainWindow::on_confirm_button_clicked()
+{
+    if (ui->sim_call_box->checkState() == Qt::CheckState::Unchecked) return;
+    for (auto &call : callings) {
+        int processor_id = call.first.first;
+        Clicking operation = call.first.second;
+        int address = call.second;
+        if (operation == Clicking::Read) bus->processors[processor_id]->readLine(address);
+        else bus->processors[processor_id]->writeLine(address);
+    }
+    callings.clear();
+}
+
