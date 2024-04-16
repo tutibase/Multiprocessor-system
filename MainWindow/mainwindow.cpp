@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     bus = new Bus();
+    bus_cycles = 0;
 
     ui->log->insertPlainText("MESIF protocol with \"least frequently used\" replacement policy:\n");
 
@@ -32,9 +33,21 @@ MainWindow::MainWindow(QWidget *parent)
                          bus, &Bus::updateLogSlot);
         QObject::connect(bus->processors[i], &Processor::updateCacheView,
                          this, &MainWindow::updateCache);
+        QObject::connect(bus->processors[i], &Processor::endBusCycle,
+                         this, &MainWindow::increaseBusCycles);
     }
 
+    ui->verticalLayout->addWidget(new QLabel("Section 0"));
+    ui->verticalLayout_2->addWidget(new QLabel("Section 0"));
+    ui->verticalLayout_3->addWidget(new QLabel("Section 0"));
+    ui->verticalLayout_4->addWidget(new QLabel("Section 0"));
     for (int i = 0; i < cache_lines_num; i++) {
+        if (i == cache_lines_num / 2) {
+            ui->verticalLayout->addWidget(new QLabel("Section 1"));
+            ui->verticalLayout_2->addWidget(new QLabel("Section 1"));
+            ui->verticalLayout_3->addWidget(new QLabel("Section 1"));
+            ui->verticalLayout_4->addWidget(new QLabel("Section 1"));
+        }
         ui->verticalLayout->addWidget(CPULabels[0][i]);
         ui->verticalLayout_2->addWidget(CPULabels[1][i]);
         ui->verticalLayout_3->addWidget(CPULabels[2][i]);
@@ -55,6 +68,8 @@ MainWindow::MainWindow(QWidget *parent)
                      this, &MainWindow::updateLog);
     QObject::connect(bus, &Bus::updateCacheView, this, &MainWindow::updateCache);
     QObject::connect(bus, &Bus::updateMemoryView, this, &MainWindow::updateMemory);
+
+    QObject::connect(bus, &Bus::endBusCycle, this, &MainWindow::increaseBusCycles);
 }
 
 MainWindow::~MainWindow()
@@ -159,9 +174,13 @@ void MainWindow::updateCache() {
             auto cache = bus->processors[i]->getCache()[j];
             if (cache.getAddress() == -1)
                 CPULabels[i][j]->setText(QString("I"));
-            else
-                CPULabels[i][j]->setText(QString("%1 | a%2 | %3").arg(cache.getState())
-                                             .arg(cache.getAddress()).arg(+cache.getData()));
+            else {
+                std::bitset<4> addr_tag(cache.getAddress());
+                CPULabels[i][j]->setText(QString("%1 | %2 | %3\t\taddress: a%4").arg(cache.getState())
+                                             .arg(QString::fromStdString(addr_tag.to_string()))
+                                             .arg(+cache.getData())
+                                             .arg(cache.getAddress()));
+            }
         }
     }
 
@@ -193,3 +212,6 @@ void MainWindow::on_confirm_button_clicked()
     callings.clear();
 }
 
+void MainWindow::increaseBusCycles() {
+    ui->bus_cycles_label->setText("Bus cycles: " + QString::number(++bus_cycles));
+}

@@ -29,6 +29,7 @@ signals:
     void BusRWITM(short lineAddress, int id); // сигнал на шину о необходимости RWITM в кэш процессора ячейки памяти
     void updateLog(QString msg); // отправить сообщение в лог
     void updateCacheView();
+    void endBusCycle();
 
 private:
     // первая половина ячеек кэша под четные адреса памяти, вторая - нечетные
