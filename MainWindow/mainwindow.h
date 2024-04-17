@@ -56,6 +56,8 @@ private slots:
 
     void increaseBusCycles();
 
+    void on_reset_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     Bus *bus;
@@ -63,6 +65,10 @@ private:
     QVector<QLabel*> memory_labels;
     QVector<QPair<Caller, int>> callings;
     int bus_cycles;
+
+    void init();
+    void clearMemory();
+    void clearLayout(QLayout *layout);
 
 };
 #endif // MAINWINDOW_H
