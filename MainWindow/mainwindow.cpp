@@ -74,7 +74,20 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    for (auto &lbl : memory_labels) delete lbl;
+
+    for (auto &cache_lbls : CPULabels)
+        for (auto &lbl : cache_lbls) {
+            delete lbl;
+        }
+
+    for (int i = 0; i < ui->verticalLayout->count(); i++) delete ui->verticalLayout->itemAt(i)->widget();
+    for (int i = 0; i < ui->verticalLayout_2->count(); i++) delete ui->verticalLayout_2->itemAt(i)->widget();
+    for (int i = 0; i < ui->verticalLayout_3->count(); i++) delete ui->verticalLayout_3->itemAt(i)->widget();
+    for (int i = 0; i < ui->verticalLayout_4->count(); i++) delete ui->verticalLayout_4->itemAt(i)->widget();
+
     delete ui;
+    delete bus;
 }
 
 void MainWindow::updateLog(QString msg) {
