@@ -7,6 +7,7 @@ class Bus : public QObject {
     Q_OBJECT
 public:
     Bus();
+    ~Bus();
 
     std::vector<Processor*> processors; // все процессоры в системе
     std::vector<MemoryLine> memory; // память в системе

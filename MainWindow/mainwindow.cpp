@@ -6,10 +6,16 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    init();
+}
+
+void MainWindow::init() {
     bus = new Bus();
     bus_cycles = 0;
 
     ui->log->insertPlainText("MESIF protocol with \"least frequently used\" replacement policy:\n");
+
+    ui->bus_cycles_label->setText("Bus cycles: 0");
 
     CPULabels = {};
 
@@ -54,6 +60,8 @@ MainWindow::MainWindow(QWidget *parent)
         ui->verticalLayout_4->addWidget(CPULabels[3][i]);
     }
 
+    memory_labels = {};
+
     for (int i = 0; i < memory_cells_num; i++) {
         memory_labels.push_back(new QLabel(QString("address: a%1, data: 0").arg(i)));
         if (i < memory_cells_num / 2) {
@@ -72,8 +80,35 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(bus, &Bus::endBusCycle, this, &MainWindow::increaseBusCycles);
 }
 
+void MainWindow::clearMemory() {
+    for (auto &lbl : memory_labels) delete lbl;
+    memory_labels.clear();
+
+    for (auto &cache_lbls : CPULabels) {
+        for (auto &lbl : cache_lbls) {
+            delete lbl;
+        }
+        cache_lbls.clear();
+    }
+    CPULabels.clear();
+
+    clearLayout(ui->verticalLayout);
+    clearLayout(ui->verticalLayout_2);
+    clearLayout(ui->verticalLayout_3);
+    clearLayout(ui->verticalLayout_4);
+
+    ui->log->clear();
+
+    delete bus;
+}
+
 MainWindow::~MainWindow()
 {
+    clearMemory();
+    for (int i = 0; i < ui->verticalLayout->count(); i++) delete ui->verticalLayout->itemAt(i)->widget();
+    for (int i = 0; i < ui->verticalLayout_2->count(); i++) delete ui->verticalLayout_2->itemAt(i)->widget();
+    for (int i = 0; i < ui->verticalLayout_3->count(); i++) delete ui->verticalLayout_3->itemAt(i)->widget();
+    for (int i = 0; i < ui->verticalLayout_4->count(); i++) delete ui->verticalLayout_4->itemAt(i)->widget();
     delete ui;
 }
 
@@ -215,3 +250,33 @@ void MainWindow::on_confirm_button_clicked()
 void MainWindow::increaseBusCycles() {
     ui->bus_cycles_label->setText("Bus cycles: " + QString::number(++bus_cycles));
 }
+
+void MainWindow::on_reset_button_clicked()
+{
+    clearMemory();
+
+    init();
+}
+
+void MainWindow::clearLayout(QLayout *layout) {
+    for (int i = 1; i < layout->count(); ) {
+        QLayoutItem *item = layout->itemAt(i);
+        if (item != 0) {
+            QWidget *widget = item->widget();
+            if (widget) {
+                if (dynamic_cast<QLabel*>(widget)) {
+                    layout->removeWidget(widget);
+                    delete widget;
+                } else {
+                    ++i;
+                }
+            } else {
+                ++i;
+            }
+        } else {
+            ++i;
+        }
+    }
+
+}
+

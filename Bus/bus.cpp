@@ -12,6 +12,10 @@ Bus::Bus() {
     }
 }
 
+Bus::~Bus() {
+    for (auto &proc : processors) delete proc;
+}
+
 void Bus::BusInvalidate(short lineAddress, int id) {
     // проходим по всем строчкам кэша в системе
     for (int i = 0; i < processors_num; i++) {
