@@ -15,6 +15,8 @@ void MainWindow::init() {
 
     ui->log->insertPlainText("MESIF protocol with \"least frequently used\" replacement policy:\n");
 
+    ui->bus_cycles_label->setText("Bus cycles: 0");
+
     CPULabels = {};
 
     for (int i = 0; i < processors_num; i++) {
