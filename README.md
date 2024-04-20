@@ -1,6 +1,6 @@
 # Multiprocessor system based on MERSI/MESIF protocol with LFU (ENG)
 
-[RUS version here (РУС версия здесь)](#многопроцессорная-система-на-базе-протокола-mersi/mesif-с-lfu-(рус))
+[RUS version here (РУС версия здесь)](#введение)
 
 ## Introduction
 This repository contains a draft of a laboratory work devoted to the development of a model of a memory subsystem in a symmetric multiprocessor system. The application is implemented in the C++ programming language using the Qt library, which provides cross-platform support and high performance.
