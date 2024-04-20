@@ -19,11 +19,11 @@ This repository contains a draft of a laboratory work devoted to the development
 The following abbreviations and designations are used in this report:
 
 - MESI - Modified (M), Exclusive (E), Shared (S), Invalid (I).
-- MESIF - Modified (M), Exclusive (E), Shared (S), Invalid (I), Direct (F).
-- SMP – symmetric multiprocessor systems.
+- MESIF - Modified (M), Exclusive (E), Shared (S), Invalid (I), Forward (F).
+- SMP – Symmetric Multiprocessor Systems.
 - LRU - Least Recently Used (linearly replaceable unit).
 - LFU - Least Frequently Used.
-- RWITM - Read with Intent to Modify.
+- RWITM - Read With Intent To Modify.
 
 ## Analytics
 
