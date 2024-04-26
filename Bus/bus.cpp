@@ -78,7 +78,9 @@ void Bus::BusRead(short lineAddress, int id) {
         // запись data в кэш
         writeDataToCache(id, cache_line_num, lineAddress, data, 'E');
     } else {
-        // запись data в кэш
+        // запись data в кэш и память
+        emit updateLog(QString("Отправка в память адреса a%1").arg(lineAddress));
+        writeDataToMemory(lineAddress, data);
         writeDataToCache(id, cache_line_num, lineAddress, data, 'F');
     }
 
