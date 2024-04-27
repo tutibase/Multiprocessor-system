@@ -51,22 +51,22 @@ These mechanisms significantly improve data consistency in multiprocessor system
 
 ### References
 
-1. Cache in multiprocessor systems. Cache coherence. MESI Protocol (https://habr.com/ru/articles/183834 /) - Habr (accessed: 16/04/2024)
-2. Communication protocol (https://en.m.wikipedia.org/wiki/Communication_protocol ) - Wikipedia (accessed: 16/04/2024)
-3. Cache computing (https://en.wikipedia.org/wiki/Cache_ (computing)) - Wikipedia (accessed: 16/04/2024)
-4. MESIF protocol (https://en.wikipedia.org/wiki/MESIF_protocol ) - Wikipedia (accessed: 16/04/2024)
-5. Cache coherence protocols (examples) (https://en.m.wikipedia.org/wiki/Cache_coherency_protocols_ (examples)) - Wikipedia (accessed: 16/04/2024)
-6. MESI Cache Coherency Protocol (https://www.scss.tcd.ie/Jeremy.Jones/vivio/caches/MESIHelp.htm) - VivioJS (accessed: 16/04/2024)
-7. MESIF (https://dbpedia.org/page/MESIF_protocol ) - DBpedia (accessed: 16/04/2024)
-8. MESIF Memory Coherence Protocol (https://studopedia.ru/18_51713_protokol-kogerentnosti-pamyati-MESIF.html ) - Studopedia (accessed: 16/04/2024)
-9. MESIF Cache Coherency Protocol 2012.pdf (https://www.scss.tcd.ie/Jeremy.Jones/vivio/caches/Andrew%20Hay%20MESIF%20Cache%20Coherency%20Protocol%202012.pdf) - Andrew Hay (accessed: 16/04/2024)
+1. Cache in multiprocessor systems. Cache coherence. MESI Protocol (https://habr.com/ru/articles/183834 /) - Habr (date of access: 16/04/2024)
+2. Communication protocol (https://en.m.wikipedia.org/wiki/Communication_protocol ) - Wikipedia (date of access: 16/04/2024)
+3. Cache computing (https://en.wikipedia.org/wiki/Cache_ (computing)) - Wikipedia (dateof access: 16/04/2024)
+4. MESIF protocol (https://en.wikipedia.org/wiki/MESIF_protocol ) - Wikipedia (date of access: 16/04/2024)
+5. Cache coherence protocols (examples) (https://en.m.wikipedia.org/wiki/Cache_coherency_protocols_ (examples)) - Wikipedia (date of access: 16/04/2024)
+6. MESI Cache Coherency Protocol (https://www.scss.tcd.ie/Jeremy.Jones/vivio/caches/MESIHelp.htm) - VivioJS (date of access: 16/04/2024)
+7. MESIF (https://dbpedia.org/page/MESIF_protocol ) - DBpedia (date of access: 16/04/2024)
+8. MESIF Memory Coherence Protocol (https://studopedia.ru/18_51713_protokol-kogerentnosti-pamyati-MESIF.html ) - Studopedia (date of access: 16/04/2024)
+9. MESIF Cache Coherency Protocol 2012.pdf (https://www.scss.tcd.ie/Jeremy.Jones/vivio/caches/Andrew%20Hay%20MESIF%20Cache%20Coherency%20Protocol%202012.pdf) - Andrew Hay (date of access: 16/04/2024)
 10. Covers.fm (https://www.cs.auckland.ac.nz/goodman/TechnicalReports/MESIF-2009.pdf ) - (date of access: 16/04/2024)
-11. MESIF protocol (https://www.semanticscholar.org/topic/MESIF-protocol/3555123 ) - Semantic Scholar (date of reference: 16/04/2024)
-12. Cache replacement policies (https://en.wikipedia.org/wiki/Cache_replacement_policies ) - Wikipedia (accessed: 16/04/2024)
+11. MESIF protocol (https://www.semanticscholar.org/topic/MESIF-protocol/3555123 ) - Semantic Scholar (date of access: 16/04/2024)
+12. Cache replacement policies (https://en.wikipedia.org/wiki/Cache_replacement_policies ) - Wikipedia (date of access: 16/04/2024)
 13. Memory II (https://teccxx.neocities.org/mx1/memory2 ) - D.R. Kuvshinov (date of access: 16/04/2024)
-14. Cache Memory (https://books.ifmo.ru/file/pdf/883.pdf ) - (accessed: 16/04/2024)
-15. At least frequently used (https://en.wikipedia.org/wiki/Least_frequently_used ) - Wikipedia (accessed: 16/04/2024)
-16. Line-replaceable unit (https://en.wikipedia.org/wiki/Line-replaceable_unit ) - Wikipedia (date requests: 16/04/2024)
+14. Cache Memory (https://books.ifmo.ru/file/pdf/883.pdf ) - (date of access: 16/04/2024)
+15. At least frequently used (https://en.wikipedia.org/wiki/Least_frequently_used ) - Wikipedia (date of access: 16/04/2024)
+16. Line-replaceable unit (https://en.wikipedia.org/wiki/Line-replaceable_unit ) - Wikipedia (date of access: 16/04/2024)
 
 ## License
 The project is distributed under the MIT license, which allows you to use, copy, modify and distribute this software product both in closed and open form, provided that the authorship is indicated.
