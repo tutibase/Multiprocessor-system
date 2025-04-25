@@ -1,4 +1,5 @@
 # Multiprocessor system based on MERSI/MESIF protocol with LFU (ENG)
+![image](https://github.com/user-attachments/assets/8b07e3ad-e531-4ce9-a5b9-2913031af550)
 
 [RUS version here (РУС версия здесь)](#введение)
 
